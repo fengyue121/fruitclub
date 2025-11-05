@@ -1,0 +1,7 @@
+{
+  "app_name": "FruitClub",
+  "version": "1.0.1",
+  "AdStartTime": 30,
+  "MinAdInterval": 15,
+  "AdNetworks": "admob,facebook"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "fruitclub-new",
+  "version": "1.0.0",
+  "description": "JSON configuration hosting and app-ads.txt for FruitClub",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step required'",
+    "start": "echo 'Static files served directly'"
+  },
+  "keywords": ["config", "json", "fruitclub", "app-ads", "iosclient"],
+  "author": "",
+  "license": "MIT"
+}

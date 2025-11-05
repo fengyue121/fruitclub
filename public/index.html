@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FruitClub Configuration Service</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .header { text-align: center; margin-bottom: 40px; }
+        .api-url {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            margin: 20px 0;
+        }
+        .button {
+            display: inline-block;
+            background: #0070f3;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 10px 5px;
+        }
+        .button:hover { background: #0051cc; }
+        .json-preview {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+        }
+        .links { text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🍎 FruitClub Configuration Service</h1>
+        <p>为 FruitClub 提供 JSON 配置与 app-ads.txt 下载地址</p>
+    </div>
+
+    <h2>📡 API 端点</h2>
+    <div class="api-url">
+        <strong>GET</strong> <span id="config-url">/config.json</span>
+    </div>
+
+    <div class="links">
+        <a href="/config.json" class="button" target="_blank">查看配置 JSON</a>
+        <a href="#" class="button" onclick="testAPI()">测试 API</a>
+        <a href="/app-ads.txt" class="button" target="_blank">查看 app-ads.txt</a>
+    </div>
+
+    <h2>📋 配置结构示例</h2>
+    <div class="json-preview">
+{
+  "app_name": "FruitClub",
+  "version": 101,
+  "enable": true,
+  "AdStartTime": 30,
+  "MinAdInterval": 15,
+  "AdNetworks": "admob,facebook"
+}
+    </div>
+
+    <h2>🔧 使用示例</h2>
+    <h3>cURL</h3>
+    <div class="json-preview">
+curl <span id="curl-url">https://your-domain.vercel.app/config.json</span>
+    </div>
+
+    <h3>JavaScript</h3>
+    <div class="json-preview">
+fetch('<span id="js-url">/config.json</span>')
+  .then(response => response.json())
+  .then(config => {
+    console.log('配置数据:', config);
+  });
+    </div>
+
+    <h3>Android (Kotlin)</h3>
+    <div class="json-preview">
+val url = java.net.URL("<span id="android-url">https://your-domain.vercel.app/config.json</span>")
+val connection = url.openConnection() as java.net.HttpURLConnection
+connection.inputStream.use { input ->
+    val json = input.readBytes().toString(Charsets.UTF_8)
+    println(json)
+}
+    </div>
+
+    <div id="test-result" style="margin-top: 30px;"></div>
+
+    <script>
+        // 更新页面中的 URL
+        const currentDomain = window.location.origin;
+        const configUrl = currentDomain + '/config.json';
+        const adsUrl = currentDomain + '/app-ads.txt';
+        document.getElementById('config-url').textContent = configUrl;
+        document.getElementById('curl-url').textContent = configUrl;
+        document.getElementById('js-url').textContent = '/config.json';
+        document.getElementById('android-url').textContent = configUrl;
+
+        // 测试 API 功能（改为静态 JSON）
+        function testAPI() {
+            const resultDiv = document.getElementById('test-result');
+            resultDiv.innerHTML = '<h3>🔄 测试配置...</h3>';
+            fetch('/config.json')
+                .then(response => response.json())
+                .then(data => {
+                    resultDiv.innerHTML = `
+                        <h3>✅ 配置获取成功</h3>
+                        <div class="json-preview">${JSON.stringify(data, null, 2)}</div>
+                        <p>app-ads.txt 地址：<a href="${adsUrl}" target="_blank">${adsUrl}</a></p>
+                    `;
+                })
+                .catch(error => {
+                    resultDiv.innerHTML = `
+                        <h3>❌ 配置获取失败</h3>
+                        <p>错误: ${error.message}</p>
+                    `;
+                });
+        }
+    </script>
+</body>
+</html>
