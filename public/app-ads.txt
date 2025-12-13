@@ -37,11 +37,7 @@ xandr.com, 13799, RESELLER
 xandr.com, 14082, RESELLER
 yieldmo.com, 3591550211052216798, RESELLER, 6a92c77cfc3d2258
 zmaticoo.com, 5135655, RESELLER
-
-google.com, pub-4072686667445108, DIRECT, f08c47fec0942fa0
-
 facebook.com, 728481809827369, RESELLER, c3e20eee3f780d68
-#unity
 bidease.com, bidease_seller_20, RESELLER
 lacunads.com, LCb555b3bc8667a09a, RESELLER
 lacunads.com, lcb555b3bc8667a09a, RESELLER
